@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *.iml
 .gradle
 /local.properties
@@ -6,7 +7,7 @@
 .DS_Store
 /build
 /captures
-
+=======
 
 # built application files
 *.apk
@@ -64,4 +65,4 @@ build/
 #for oh-my-zsh jira plugin (https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins#jira)
 .jira-url
 atlassian-ide-plugin.xml
-
+>>>>>>> 54556e3f2aa18140aa7ccec755e947eed13340c1
