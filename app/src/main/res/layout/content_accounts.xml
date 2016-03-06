@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-</LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/account"
+        android:textSize="25sp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:id="@+id/account_text"/>
+    <EditText
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:id="@+id/account_box"
+        android:text="@string/account_user"
+        android:layout_below="@+id/account_text"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:enabled="false"/>
+</RelativeLayout>

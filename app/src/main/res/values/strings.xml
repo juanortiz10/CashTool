@@ -22,7 +22,10 @@
     <string name="quantity">Monto</string>
     <string name="category">Categoria</string>
     <string name="it_repeats">Se Repite</string>
-    <string name="add">Ingresar</string>
+    <string name="add">Guardar</string>
+    <string name="account">Cuenta</string>
+    <string name="account_user">Juan Ortiz</string>
+    <string name="level_rich_msj">**El nivel de riqueza indica la cantidad de meses que podrías vivir en base a tus gastos actuales</string>
 
     <string-array name="times">
         <item>7 Dias</item>

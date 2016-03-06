@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_marginTop="35sp"
+    android:layout_marginTop="30sp"
     android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -47,6 +47,18 @@
             android:id="@+id/level_rich_box"
             android:layout_below="@+id/level_rich"
             style="@style/boxIndexDesign"/>
+        <TextView
+            android:layout_width="100sp"
+            android:layout_height="wrap_content"
+            android:id="@+id/level_rich_text"
+            android:textSize="10sp"
+            android:text="@string/level_rich_msj"
+            android:layout_below="@id/level_rich_box"
+            android:layout_alignRight="@+id/acum_money"
+            android:gravity="center"
+            android:layout_alignEnd="@+id/acum_money"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
     </RelativeLayout>
 
     <RelativeLayout

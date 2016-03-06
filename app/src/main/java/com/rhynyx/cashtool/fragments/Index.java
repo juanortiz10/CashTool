@@ -33,16 +33,7 @@ public class Index extends Fragment implements View.OnClickListener{
         btn_expenses.setOnClickListener(this);
         btn_revenue.setOnClickListener(this);
 
-        disable();
         return v;
-    }
-
-    //Disable all components
-    private void disable(){
-        monthly_payment_box.setEnabled(false);
-        acum_money_box.setEnabled(false);
-        total_acum_box.setEnabled(false);
-        level_rich_box.setEnabled(false);
     }
 
     @Override

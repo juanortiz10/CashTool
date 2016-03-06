@@ -35,5 +35,5 @@ public class Revenue extends Fragment {
         frecuency_options2.setAdapter(adapter);
         return v;
     }
-    
+
 }
