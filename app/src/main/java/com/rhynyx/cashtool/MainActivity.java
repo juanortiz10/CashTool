@@ -14,7 +14,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.rhynyx.cashtool.fragments.Accounts;
+import com.rhynyx.cashtool.fragments.AccountsResume;
+import com.rhynyx.cashtool.fragments.Expenses;
 import com.rhynyx.cashtool.fragments.Index;
+import com.rhynyx.cashtool.fragments.Revenue;
+import com.rhynyx.cashtool.fragments.Settings;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -88,20 +93,32 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Fragment fragment = null;
 
         if (id == R.id.nav_settings) {
-
+            fragment = new Settings();
+            setTitle(R.string.settings);
         } else if (id == R.id.nav_home) {
-
+            fragment = new Index();
+            setTitle(R.string.home);
         } else if (id == R.id.nav_revenue) {
-
+            fragment = new Revenue();
+            setTitle(R.string.revenue);
         } else if (id == R.id.nav_expenses) {
-
+            fragment = new Expenses();
+            setTitle(R.string.expenses);
         } else if (id == R.id.nav_accounts) {
-
+            fragment = new Accounts();
+            setTitle(R.string.accounts);
         } else if (id == R.id.nav_account_resume) {
-
+            fragment = new AccountsResume();
+            setTitle(R.string.account_resume);
         }
+
+        android.support.v4.app.FragmentTransaction fragmentTransaction1
+                = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction1.replace(R.id.content_frame, fragment);
+        fragmentTransaction1.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

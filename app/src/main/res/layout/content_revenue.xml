@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_marginTop="30sp"
     android:layout_height="match_parent">
 
     <TextView
@@ -76,7 +77,7 @@
     <Spinner
         android:layout_width="200sp"
         android:layout_height="wrap_content"
-        android:id="@+id/frecuency_options"
+        android:id="@+id/frecuency_options2"
         android:layout_below="@+id/check_repeat"
         android:layout_centerHorizontal="true">
     </Spinner>
@@ -87,6 +88,6 @@
         android:text="@string/add"
         android:background="#FFF"
         android:id="@+id/btn_save_revenue"
-        android:layout_below="@+id/frecuency_options"
+        android:layout_below="@+id/frecuency_options2"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>
