@@ -1,0 +1,45 @@
+<resources>>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+    <style name="textIndexDesign">
+        <item name="android:fontFamily">@string/font_family</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="boxIndexDesign">
+        <item name="android:layout_width">100sp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@string/font_family</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:layout_marginBottom">10sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:inputType">number</item>
+    </style>
+    <style name="buttonIndexDesign">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">100sp</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_marginBottom">10sp</item>
+    </style>
+    <style name="headerText">
+        <item name="android:textSize">50sp</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:fontFamily">@string/font_family</item>
+        <item name="android:layout_marginTop">25sp</item>
+    </style>
+    <style name="balanceHeader">
+        <item name="android:textSize">50sp</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginTop">20sp</item>
+    </style>
+</resources>

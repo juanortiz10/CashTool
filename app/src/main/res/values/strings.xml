@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">CashTool</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="home">Inicio</string>
+    <string name="revenue">Ingresos</string>
+    <string name="expenses">Egresos</string>
+    <string name="accounts">Cuentas</string>
+    <string name="account_resume">Resumen de Cuentas</string>
+    <string name="settings">Configuración</string>
+    <string name="monthly_payment">Saldo del Mes</string>
+    <string name="acum_money">Saldo Acumulado</string>
+    <string name="total_acum">Total Acumulado</string>
+    <string name="level_rich">Nivel de Riqueza</string>
+    <string name="font_family">sans-serif-condensed</string>
+    <string name="balance">Saldo</string>
+    <string name="account_text">Cuenta</string>
+    <string name="zero">$0.0</string>
+    <string name="quantity">Monto</string>
+    <string name="category">Categoria</string>
+    <string name="it_repeats">Se Repite</string>
+    <string name="add">Ingresar</string>
+
+    <string-array name="times">
+        <item>7 Dias</item>
+        <item>15 Dias</item>
+        <item>1 Mes</item>
+        <item>3 Meses</item>
+        <item>6 Meses</item>
+        <item>1 Año</item>
+    </string-array>
+</resources>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        style="@style/headerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/balance"
+        android:id="@+id/revenue_header"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/account_text"
+        android:id="@+id/account_text2"
+        android:layout_below="@+id/revenue_header"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        style="@style/balanceHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/zero"
+        android:id="@+id/balance_text2"
+        android:layout_below="@+id/account_text2"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="@string/quantity"
+        android:id="@+id/quantity_expenses"
+        android:layout_below="@+id/balance_text2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp" />
+
+    <EditText
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:id="@+id/quantity_expenses_box"
+        android:layout_below="@+id/quantity_expenses"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/category"
+        android:textSize="20sp"
+        android:id="@+id/category"
+        android:layout_below="@+id/quantity_expenses_box"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:id="@+id/category_box"
+        android:textSize="20sp"
+        android:layout_below="@+id/category"
+        android:layout_centerHorizontal="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/it_repeats"
+        android:id="@+id/check_repeat"
+        android:textSize="15sp"
+        android:layout_below="@+id/category_box"
+        android:layout_alignRight="@+id/revenue_header"
+        android:layout_alignEnd="@+id/revenue_header" />
+    <Spinner
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:id="@+id/frecuency_options"
+        android:layout_below="@+id/check_repeat"
+        android:layout_centerHorizontal="true">
+    </Spinner>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add"
+        android:background="#FFF"
+        android:id="@+id/btn_save_revenue"
+        android:layout_below="@+id/frecuency_options"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
