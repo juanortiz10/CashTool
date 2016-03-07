@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.rhynyx.cashtool.database.DataBaseHelper;
 import com.rhynyx.cashtool.fragments.Accounts;
 import com.rhynyx.cashtool.fragments.AccountsResume;
 import com.rhynyx.cashtool.fragments.Expenses;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        //DataBaseHelper dataBaseHelper = new DataBaseHelper(getApplicationContext());
     }
 
     @Override

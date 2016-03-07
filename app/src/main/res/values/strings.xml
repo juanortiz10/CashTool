@@ -26,6 +26,9 @@
     <string name="account">Cuenta</string>
     <string name="account_user">Juan Ortiz</string>
     <string name="level_rich_msj">**El nivel de riqueza indica la cantidad de meses que podrías vivir en base a tus gastos actuales</string>
+    <string name="something_is_wrong">Algo ha salido mal!</string>
+    <string name="expense_added">Egreso agregado correctamente</string>
+    <string name="revenue_added">Ingreso agregado exitosamente</string>
 
     <string-array name="times">
         <item>7 Dias</item>

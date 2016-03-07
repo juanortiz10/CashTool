@@ -8,7 +8,7 @@
         style="@style/headerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/balance"
+        android:text="@string/expenses"
         android:id="@+id/expenses_header"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -22,21 +22,12 @@
         android:layout_centerHorizontal="true" />
 
     <TextView
-        style="@style/balanceHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/zero"
-        android:id="@+id/balance_text"
-        android:layout_below="@+id/account_text"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:text="@string/quantity"
         android:id="@+id/quantity_expenses"
-        android:layout_below="@+id/balance_text"
+        android:layout_below="@+id/account_text"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp" />
 
@@ -72,8 +63,7 @@
         android:id="@+id/check_repeat"
         android:textSize="15sp"
         android:layout_below="@+id/category_box"
-        android:layout_alignRight="@+id/expenses_header"
-        android:layout_alignEnd="@+id/expenses_header" />
+        android:layout_centerHorizontal="true" />
     <Spinner
         android:layout_width="200sp"
         android:layout_height="wrap_content"
