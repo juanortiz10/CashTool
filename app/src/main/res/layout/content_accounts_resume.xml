@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginTop="25sp">
     <TextView
         style="@style/headerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/Ingresos"
-        android:text="@string/revenue"/>
+        android:text="@string/revenue"
+        />
 
     <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/table_ARIng">
+        android:id="@+id/table_ARIng"
+        android:layout_below="@+id/Ingresos"
+        android:layout_centerHorizontal="true">
 
     </TableLayout>
     <TextView
@@ -20,14 +24,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/Egresos"
-        android:text="@string/expenses" />
+        android:text="@string/expenses"
+        android:layout_below="@+id/table_ARIng"/>
 
     <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/table_AREgr">
+        android:id="@+id/table_AREgr"
+        android:layout_below="@+id/Egresos"
+        android:layout_centerHorizontal="true">
 
 
     </TableLayout>
 
-</LinearLayout>
+</RelativeLayout>
