@@ -38,4 +38,10 @@
         <item>6 Meses</item>
         <item>1 Año</item>
     </string-array>
+
+    <string-array name="table_AccountsResume">
+        <item>Categoria</item>
+        <item>Monto</item>
+        <item>Fecha</item>
+    </string-array>
 </resources>
