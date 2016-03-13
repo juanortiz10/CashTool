@@ -22,7 +22,7 @@ import com.rhynyx.cashtool.database.DataBaseHelper;
  * Created by juan on 5/03/16.
  */
 public class Expenses extends Fragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
-    Spinner frecuency_options;
+    Spinner frecuency_options,how_many_optionse;
     EditText quantity_expenses_box,category_box;
     CheckBox check_repeat;
     Button btn_save_expenses;
@@ -34,6 +34,9 @@ public class Expenses extends Fragment implements View.OnClickListener, Compound
 
         frecuency_options = (Spinner) v.findViewById(R.id.frecuency_options);
         frecuency_options.setEnabled(false);
+        how_many_optionse = (Spinner) v.findViewById(R.id.how_many_optionse);
+        how_many_optionse.setEnabled(false);
+
         quantity_expenses_box = (EditText) v.findViewById(R.id.quantity_expenses_box);
         category_box = (EditText) v.findViewById(R.id.category_box);
 
@@ -45,8 +48,15 @@ public class Expenses extends Fragment implements View.OnClickListener, Compound
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.times, android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> adapterHow = ArrayAdapter.createFromResource(getActivity(),
+                R.array.how_long, android.R.layout.simple_spinner_dropdown_item);
+
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterHow.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         frecuency_options.setAdapter(adapter);
+        how_many_optionse.setAdapter(adapterHow);
+
         return v;
     }
 
@@ -57,17 +67,24 @@ public class Expenses extends Fragment implements View.OnClickListener, Compound
         String category = category_box.toString().trim();
         boolean isRepeat = check_repeat.isChecked();
         int whenDays = frecuency_options.getSelectedItemPosition();
+        int how_many = how_many_optionse.getSelectedItemPosition();
 
-        if (!isRepeat)
+        if (!isRepeat) {
             whenDays = -1;
+            how_many = -1;
+        }
         try {
-            if (dataBaseHelper.insertNewExpense(dataBaseHelper, category, quantity, isRepeat, whenDays) > 0) {
-                category_box.setText("");
-                check_repeat.setChecked(false);
-                quantity_expenses_box.setText("");
-                Toast.makeText(getActivity().getApplicationContext(), R.string.expense_added, Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(getActivity().getApplicationContext(), R.string.something_is_wrong, Toast.LENGTH_SHORT).show();
+            if(whenDays !=0 && how_many!= 0) {
+                if (dataBaseHelper.insertNewExpense(dataBaseHelper, category, quantity, isRepeat, whenDays, how_many) > 0) {
+                    category_box.setText("");
+                    check_repeat.setChecked(false);
+                    quantity_expenses_box.setText("");
+                    Toast.makeText(getActivity().getApplicationContext(), R.string.expense_added, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity().getApplicationContext(), R.string.something_is_wrong, Toast.LENGTH_SHORT).show();
+                }
+            }else{
+                Toast.makeText(getActivity().getApplicationContext(), R.string.wrong_information,Toast.LENGTH_SHORT).show();
             }
         } catch (Exception ex) {
             Toast.makeText(getActivity().getApplicationContext(), R.string.something_is_wrong, Toast.LENGTH_SHORT).show();
@@ -78,8 +95,10 @@ public class Expenses extends Fragment implements View.OnClickListener, Compound
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if(isChecked){
             frecuency_options.setEnabled(true);
+            how_many_optionse.setEnabled(true);
         }else{
             frecuency_options.setEnabled(false);
+            how_many_optionse.setEnabled(false);
         }
     }
 }
