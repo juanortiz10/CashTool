@@ -8,8 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.rhynyx.cashtool.R;
+import com.rhynyx.cashtool.database.DataBaseHelper;
 
 /**
  * Created by juan on 5/03/16.
@@ -33,6 +35,12 @@ public class Index extends Fragment implements View.OnClickListener{
         btn_expenses.setOnClickListener(this);
         btn_revenue.setOnClickListener(this);
 
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity().getApplicationContext());
+        double total_acum = (dataBaseHelper.getAllRev()-dataBaseHelper.getAllExp());
+        double monthly_am = dataBaseHelper.getMonthlyAmount();
+
+        total_acum_box.setText("$".concat(String.valueOf(total_acum)));
+        monthly_payment_box.setText("$".concat(String.valueOf(monthly_am)));
         return v;
     }
 

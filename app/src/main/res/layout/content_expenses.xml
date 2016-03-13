@@ -34,6 +34,7 @@
     <EditText
         android:layout_width="200sp"
         android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
         android:textSize="20sp"
         android:id="@+id/quantity_expenses_box"
         android:layout_below="@+id/quantity_expenses"

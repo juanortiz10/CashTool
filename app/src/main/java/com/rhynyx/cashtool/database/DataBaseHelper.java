@@ -5,9 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import com.rhynyx.cashtool.fragments.Expenses;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -63,11 +67,28 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public long insertNewExpense(DataBaseHelper dataBaseHelper, String category, Double cuantity, boolean isRepeat, int when){
         SQLiteDatabase db = dataBaseHelper.getReadableDatabase();
 
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+        Date today = Calendar.getInstance().getTime();
+        int whenDays;
+        if (isRepeat)
+            whenDays = checkDays(when);
+        else
+            whenDays = 0;
+
+        //Add days
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(today);
+        calendar.add(Calendar.DATE, whenDays);
+        String untilDays = dateFormat.format(calendar.getTime());
+        String todayDate = dateFormat.format(today);
+
         ContentValues values = new ContentValues();
         values.put(ExpensesTable.TableExp.category_expense, category);
-        values.put(ExpensesTable.TableExp.cuantity_expense, cuantity);
-        values.put(ExpensesTable.TableExp.is_repeat, isRepeat);
-
+        values.put(ExpensesTable.TableExp.cuantity_expense, String.valueOf(cuantity));
+        values.put(ExpensesTable.TableExp.is_repeat, String.valueOf(isRepeat));
+        values.put(ExpensesTable.TableExp.when_days, whenDays);
+        values.put(ExpensesTable.TableExp.date_now, todayDate);
+        values.put(ExpensesTable.TableExp.date_next, untilDays);
         long id = db.insert(ExpensesTable.TableExp.expense_table_name,null, values);
         return id;
     }
@@ -76,7 +97,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = dataBaseHelper.getReadableDatabase();
 
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
-        Date today = Calendar.getInstance().getTime();
+            Date today = Calendar.getInstance().getTime();
         int whenDays;
         if (isRepeat)
             whenDays = checkDays(when);
@@ -107,47 +128,99 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase database = this.getReadableDatabase();
         queryExp.append("SELECT ");
         queryExp.append(ExpensesTable.TableExp.cuantity_expense);
-        queryExp.append("FROM ");
+        queryExp.append(" FROM ");
         queryExp.append(ExpensesTable.TableExp.expense_table_name);
 
         Cursor cursor = database.rawQuery(queryExp.toString(),null);
+        double value = 0.0;
         if (cursor.moveToFirst()){
             do {
                 //TODO
+                value += Double.parseDouble(cursor.getString(cursor.getColumnIndex(ExpensesTable.TableExp.cuantity_expense)));
             }while (cursor.moveToNext());
         }
-        return 0.0;
+        database.close();
+        return value;
     }
 
+    //Get all revenue (sum) that is saved on the BD
     public double getAllRev(){
         StringBuilder queryRev = new StringBuilder();
         SQLiteDatabase database = this.getReadableDatabase();
         queryRev.append("SELECT ");
         queryRev.append(RevenueTable.TableRev.cuantity_revenue);
-        queryRev.append("FROM ");
+        queryRev.append(" FROM ");
         queryRev.append(RevenueTable.TableRev.revenue_table_name);
 
         Cursor cursor =  database.rawQuery(queryRev.toString(),null);
+        double value = 0.0;
+
         if (cursor.moveToFirst()){
             do {
-                 //TODO
+                 value += Double.parseDouble(cursor.getString(cursor.getColumnIndex(RevenueTable.TableRev.cuantity_revenue)));
             }while (cursor.moveToNext());
         }
+        database.close();
+        return value;
+    }
+    public double getMonthlyExpenses(){
+        StringBuilder queryExp = new StringBuilder();
+        SQLiteDatabase database = this.getReadableDatabase();
+
+        queryExp.append(" SELECT ");
+        queryExp.append(ExpensesTable.TableExp.cuantity_expense);
+        queryExp.append(" FROM ");
+        queryExp.append(ExpensesTable.TableExp.expense_table_name);
+        queryExp.append(" WHERE substr(".concat(ExpensesTable.TableExp.date_now).concat(",4,2)='").concat(getMonth()).concat("';"));
+
+        Cursor cursor =  database.rawQuery(queryExp.toString(),null);
+        double valExp = 0.0;
+
+        if (cursor.moveToFirst()){
+            do {
+                valExp += Double.parseDouble(cursor.getString(cursor.getColumnIndex(ExpensesTable.TableExp.cuantity_expense)));
+                System.out.println(valExp);
+            }while (cursor.moveToNext());
+        }
+        database.close();
+        return valExp;
+    }
+
+    public double getMonthlyRevenue(){
+        SQLiteDatabase database = this.getReadableDatabase();
+
+        StringBuilder queryRev = new StringBuilder();
+        queryRev.append("SELECT ");
+        queryRev.append(RevenueTable.TableRev.cuantity_revenue);
+        queryRev.append(" FROM ");
+        queryRev.append(RevenueTable.TableRev.revenue_table_name);
+        queryRev.append(" WHERE substr("+RevenueTable.TableRev.date_now+",4,2)='"+getMonth()+"';");
+
+        Cursor cursor =  database.rawQuery(queryRev.toString(),null);
+
+        double valRev =0.0;
+        if (cursor.moveToFirst()){
+            do {
+                valRev += Double.parseDouble(cursor.getString(cursor.getColumnIndex(RevenueTable.TableRev.cuantity_revenue)));
+            }while (cursor.moveToNext());
+        }
+        database.close();
+        return valRev;
+    }
+
+    //Get money amount per month
+    public double getMonthlyAmount(){
+        return this.getMonthlyRevenue()-this.getMonthlyExpenses();
+    }
+
+    //
+    public double getMoneyAcum(){
         return 0.0;
     }
 
-    public void getAll(){
-        String query = "SELECT * FROM ".concat(ExpensesTable.TableExp.expense_table_name);
-        SQLiteDatabase database = this.getReadableDatabase();
-        Cursor cursor = database.rawQuery(query,null);
-
-        if(cursor.moveToFirst()){
-            do {
-                //TODO
-            }while (cursor.moveToNext());
-        }
+    public double getRichLevel(){
+        return 0.0;
     }
-
 
     public int checkDays(int position){
         if (position == 0){
@@ -164,5 +237,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             return 360;
         }
         return 0;
+    }
+    //This method returns the number of an actual month
+    private String getMonth(){
+        java.util.Date date= new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        String monthNumber = String.valueOf(cal.get(Calendar.MONTH)+1);
+
+        if(monthNumber.length() < 2){
+            return "0"+monthNumber;
+        }
+        return monthNumber;
     }
 }
