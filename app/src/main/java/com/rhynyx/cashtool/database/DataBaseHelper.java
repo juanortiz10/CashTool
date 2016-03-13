@@ -39,6 +39,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         queryExp.append(ExpensesTable.TableExp.cuantity_expense.concat(" LONG,"));
         queryExp.append(ExpensesTable.TableExp.is_repeat.concat(" TEXT,"));
         queryExp.append(ExpensesTable.TableExp.when_days.concat(" INTEGER,"));
+        queryExp.append(ExpensesTable.TableExp.how_many.concat(" INTEGER,"));
         queryExp.append(ExpensesTable.TableExp.date_now.concat(" TEXT,"));
         queryExp.append(ExpensesTable.TableExp.date_next.concat(" TEXT"));
         queryExp.append(");");
@@ -51,6 +52,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         queryRev.append(RevenueTable.TableRev.cuantity_revenue.concat(" LONG,"));
         queryRev.append(RevenueTable.TableRev.is_repeat.concat(" TEXT,"));
         queryRev.append(RevenueTable.TableRev.when_days.concat(" INTEGER,"));
+        queryRev.append(RevenueTable.TableRev.how_many.concat(" INTEGER,"));
         queryRev.append(RevenueTable.TableRev.date_now.concat(" TEXT,"));
         queryRev.append(RevenueTable.TableRev.date_next.concat(" TEXT"));
         queryRev.append(");");
@@ -64,7 +66,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public long insertNewExpense(DataBaseHelper dataBaseHelper, String category, Double cuantity, boolean isRepeat, int when){
+    public long insertNewExpense(DataBaseHelper dataBaseHelper, String category, Double cuantity, boolean isRepeat, int when, int howMany){
         SQLiteDatabase db = dataBaseHelper.getReadableDatabase();
 
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -89,13 +91,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         values.put(ExpensesTable.TableExp.when_days, whenDays);
         values.put(ExpensesTable.TableExp.date_now, todayDate);
         values.put(ExpensesTable.TableExp.date_next, untilDays);
+        values.put(ExpensesTable.TableExp.how_many, howMany);
         long id = db.insert(ExpensesTable.TableExp.expense_table_name,null, values);
 
         db.close();
         return id;
     }
 
-    public long insertNewRevenue(DataBaseHelper dataBaseHelper, String category, Double cuantity, boolean isRepeat, int when){
+    public long insertNewRevenue(DataBaseHelper dataBaseHelper, String category, Double cuantity, boolean isRepeat, int when,int howMany){
         SQLiteDatabase db = dataBaseHelper.getReadableDatabase();
 
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -120,7 +123,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         values.put(RevenueTable.TableRev.when_days, whenDays);
         values.put(RevenueTable.TableRev.date_now, todayDate);
         values.put(RevenueTable.TableRev.date_next, untilDays);
-        System.out.println(todayDate);
+        values.put(RevenueTable.TableRev.how_many, howMany);
+
         long id = db.insert(RevenueTable.TableRev.revenue_table_name, null, values);
 
         db.close();
@@ -134,13 +138,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         queryExp.append("SUM(".concat(ExpensesTable.TableExp.cuantity_expense).concat(")"));
         queryExp.append(" FROM ");
         queryExp.append(ExpensesTable.TableExp.expense_table_name);
-
-        Cursor cursor = database.rawQuery(queryExp.toString(),null);
         double value = 0.0;
-        if (cursor.moveToFirst())
-                value = Double.parseDouble(cursor.getString(0));
+        try {
+            Cursor cursor = database.rawQuery(queryExp.toString(), null);
 
-        database.close();
+            if (cursor.moveToFirst())
+                value = Double.parseDouble(cursor.getString(0));
+        }catch (Exception ex){
+
+        }finally {
+            database.close();
+        }
+
         return value;
     }
 
@@ -152,14 +161,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         queryRev.append("SUM(".concat(RevenueTable.TableRev.cuantity_revenue).concat(")"));
         queryRev.append(" FROM ");
         queryRev.append(RevenueTable.TableRev.revenue_table_name);
-
-        Cursor cursor =  database.rawQuery(queryRev.toString(),null);
         double value = 0.0;
+        try {
+            Cursor cursor = database.rawQuery(queryRev.toString(), null);
 
-        if (cursor.moveToFirst())
-                 value = Double.parseDouble(cursor.getString(0));
+            if (cursor.moveToFirst())
+                value = Double.parseDouble(cursor.getString(0));
+        }catch (Exception ex){
 
-        database.close();
+        }finally {
+            database.close();
+        }
         return value;
     }
     public double getMonthlyExpenses(){
@@ -174,10 +186,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         Cursor cursor =  database.rawQuery(queryExp.toString(),null);
         double valExp = 0.0;
-
-        if (cursor.moveToFirst())
+        try {
+            if (cursor.moveToFirst())
                 valExp = Double.parseDouble(cursor.getString(0));
-        database.close();
+        }catch (Exception ex){
+
+        }finally {
+            database.close();
+        }
+
         return valExp;
     }
 
@@ -193,11 +210,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         Cursor cursor =  database.rawQuery(queryExp.toString(),null);
         double valExp = 0.0;
-
-        if (cursor.moveToFirst())
+        try {
+            if (cursor.moveToFirst())
                 valExp = Double.parseDouble(cursor.getString(0));
+        }catch (Exception ex){
 
-        database.close();
+        }finally {
+            database.close();
+        }
         return valExp;
     }
 
@@ -213,10 +233,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         Cursor cursor =  database.rawQuery(queryRev.toString(),null);
         double valRev =0.0;
-        if(cursor.moveToFirst())
+        try {
+            if (cursor.moveToFirst())
                 valRev = Double.parseDouble(cursor.getString(0));
+        }catch (Exception ex){
 
-        database.close();
+        }finally {
+            database.close();
+        }
+
         return valRev;
     }
 
@@ -233,10 +258,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor =  database.rawQuery(queryRev.toString(),null);
 
         double valRev =0.0;
-        if (cursor.moveToFirst())
+        try {
+            if (cursor.moveToFirst())
                 valRev = Double.parseDouble(cursor.getString(0));
 
-        database.close();
+        }catch (Exception ex){
+
+        }finally {
+            database.close();
+        }
         return valRev;
     }
 
@@ -252,20 +282,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         Cursor cursor =  database.rawQuery(queryExp.toString(),null);
         double valExp = 0.0;
-        int counter= 0;
-        if (cursor.moveToFirst()) {
-            do{
-                valExp += Double.parseDouble(cursor.getString(cursor.getColumnIndex(ExpensesTable.TableExp.cuantity_expense)));
-                counter ++;
-            }while (cursor.moveToNext());
+        int counter = 0;
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    valExp += Double.parseDouble(cursor.getString(cursor.getColumnIndex(ExpensesTable.TableExp.cuantity_expense)));
+                    counter++;
+                } while (cursor.moveToNext());
+            }
+        }catch (Exception ex){
+
+        }finally {
+            database.close();
         }
-        database.close();
+
         return valExp/counter;
     }
     //Get money amount per month
     public double getMonthlyAmount(){
         return this.getMonthlyRevenue()-this.getMonthlyExpenses();
     }
+
 
     //Get money amount per year
     public double getAnnualAmount(){
@@ -278,17 +315,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public int checkDays(int position){
-        if (position == 0){
+        if (position == 1){
             return 7;
-        }else if(position == 1){
-            return 15;
         }else if(position == 2){
-            return 30;
+            return 15;
         }else if(position == 3){
-            return 90;
+            return 30;
         }else if(position == 4){
-            return 180;
+            return 90;
         }else if(position == 5){
+            return 180;
+        }else if(position == 6){
             return 360;
         }
         return 0;
@@ -312,5 +349,44 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         return String.valueOf(cal.get(Calendar.YEAR));
+    }
+
+    public void checkExpensesUpdate(){
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date today = Calendar.getInstance().getTime();
+        String todayDate = dateFormat.format(today);
+
+        StringBuilder queryExp = new StringBuilder();
+        SQLiteDatabase database = this.getReadableDatabase();
+
+        queryExp.append(" SELECT *");
+        queryExp.append(" FROM ");
+        queryExp.append(ExpensesTable.TableExp.expense_table_name);
+        queryExp.append(" WHERE ".concat(ExpensesTable.TableExp.date_next).concat("='").concat(todayDate).concat("';"));
+
+        Cursor cursor =  database.rawQuery(queryExp.toString(), null);
+        ArrayList<com.rhynyx.cashtool.models.Expenses> ids = new ArrayList<>();
+
+        if(cursor.moveToFirst()){
+            do {
+                /*com.rhynyx.cashtool.models.Expenses expenses = new com.rhynyx.cashtool.models.Expenses();
+                expenses.setId_expense(Integer.parseInt(cursor.getString(cursor.getColumnIndex(ExpensesTable.TableExp.id_expense))));
+                expenses.setWhen_days(Integer.parseInt(cursor.getString(cursor.getColumnIndex(ExpensesTable.TableExp.when_days))));
+                expenses.setDate_next(cursor.getString(cursor.getColumnIndex(ExpensesTable.TableExp.date_next)));
+                AGARRAR Cantidades, dias a repetirB
+                //ids.add(expenses);*/
+
+            }while (cursor.moveToNext());
+        }
+        /*
+        * Algorithm
+        * *Check today date
+        * compare with the data_next
+        * if are similar results, update charge and data_next
+        * */
+    }
+
+    public void checkRevenueUpdate(){
+
     }
 }

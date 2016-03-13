@@ -29,14 +29,32 @@
     <string name="something_is_wrong">Algo ha salido mal!</string>
     <string name="expense_added">Egreso agregado correctamente</string>
     <string name="revenue_added">Ingreso agregado exitosamente</string>
+    <string name="wrong_information">Selecciona correctamente todos los componentes</string>
 
     <string-array name="times">
+        <item>Repetir Cada</item>
         <item>7 Dias</item>
         <item>15 Dias</item>
         <item>1 Mes</item>
         <item>3 Meses</item>
         <item>6 Meses</item>
         <item>1 Año</item>
+    </string-array>
+
+    <string-array name="how_long">
+        <item>Ocasiones</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
     </string-array>
 
     <string-array name="table_AccountsResume">

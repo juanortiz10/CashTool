@@ -36,8 +36,13 @@ public class Index extends Fragment implements View.OnClickListener{
         btn_expenses.setOnClickListener(this);
         btn_revenue.setOnClickListener(this);
 
-        new LoadInformation().execute();
         return v;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        new LoadInformation().execute();
     }
 
     @Override
@@ -61,16 +66,22 @@ public class Index extends Fragment implements View.OnClickListener{
      class LoadInformation extends AsyncTask<Void, Void, Void>{
         @Override
         protected Void doInBackground(Void... params) {
-            DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity().getApplicationContext());
-            double total_acum = (dataBaseHelper.getAllRev()-dataBaseHelper.getAllExp());
-            double monthly_am = dataBaseHelper.getMonthlyAmount();
-            double acum_money_year= dataBaseHelper.getAnnualAmount();
-            double level_rich = dataBaseHelper.getRichLevel();
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity().getApplicationContext());
+                    double total_acum = (dataBaseHelper.getAllRev() - dataBaseHelper.getAllExp());
+                    double monthly_am = dataBaseHelper.getMonthlyAmount();
+                    double acum_money_year = dataBaseHelper.getAnnualAmount();
+                    double level_rich = dataBaseHelper.getRichLevel();
 
-            total_acum_box.setText("$".concat(String.valueOf(total_acum)));
-            monthly_payment_box.setText("$".concat(String.valueOf(monthly_am)));
-            acum_money_year_box.setText("$".concat(String.valueOf(acum_money_year)));
-            level_rich_box.setText("$".concat(String.valueOf(level_rich)));
+                    total_acum_box.setText("$".concat(String.valueOf(total_acum)));
+                    monthly_payment_box.setText("$".concat(String.valueOf(monthly_am)));
+                    acum_money_year_box.setText("$".concat(String.valueOf(acum_money_year)));
+                    level_rich_box.setText("$".concat(String.valueOf(level_rich)));
+                }
+            });
+
             return null;
         }
     }

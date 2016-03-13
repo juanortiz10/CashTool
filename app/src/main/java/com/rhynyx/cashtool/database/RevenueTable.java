@@ -17,5 +17,6 @@ public class RevenueTable {
         public static final String date_now = "date_now";
         public static final String date_next = "date_next";
         public static final String when_days = "when_days";
+        public static final String how_many= "how_many";
     }
 }

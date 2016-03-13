@@ -28,7 +28,7 @@ import com.rhynyx.cashtool.database.DataBaseHelper;
  * Created by juan on 5/03/16.
  */
 public class Revenue extends Fragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
-    Spinner frecuency_options2;
+    Spinner frecuency_options2,how_many_optionsr;
     EditText quantity_expenses_box,category_box;
     CheckBox check_repeat;
     Button btn_save_revenue;
@@ -41,6 +41,9 @@ public class Revenue extends Fragment implements View.OnClickListener, CompoundB
         frecuency_options2 = (Spinner) v.findViewById(R.id.frecuency_options2);
         frecuency_options2.setEnabled(false);
 
+        how_many_optionsr = (Spinner) v.findViewById(R.id.how_many_optionsr);
+        how_many_optionsr.setEnabled(false);
+
         quantity_expenses_box = (EditText)v.findViewById(R.id.quantity_expenses_box);
         category_box = (EditText) v.findViewById(R.id.category_box);
 
@@ -52,8 +55,15 @@ public class Revenue extends Fragment implements View.OnClickListener, CompoundB
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.times, android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> adapterLong = ArrayAdapter.createFromResource(getActivity(),
+                R.array.how_long, android.R.layout.simple_spinner_dropdown_item);
+
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterLong.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         frecuency_options2.setAdapter(adapter);
+        how_many_optionsr.setAdapter(adapterLong);
+
         return v;
     }
 
@@ -65,17 +75,23 @@ public class Revenue extends Fragment implements View.OnClickListener, CompoundB
             String category = category_box.toString().trim();
             boolean isRepeatitive = check_repeat.isChecked();
             int whenToRepeat = frecuency_options2.getSelectedItemPosition();
+            int howManyTimes = how_many_optionsr.getSelectedItemPosition();
 
-            if(!isRepeatitive)
+            if(!isRepeatitive) {
                 whenToRepeat = -1;
-
-            if(dataBaseHelper.insertNewRevenue(dataBaseHelper, category, quantity, isRepeatitive, whenToRepeat) > 0){
-                category_box.setText("");
-                check_repeat.setChecked(false);
-                quantity_expenses_box.setText("");
-                Toast.makeText(getActivity().getApplicationContext(), R.string.revenue_added,Toast.LENGTH_SHORT).show();
-            }else{
-                Toast.makeText(getActivity().getApplicationContext(), R.string.something_is_wrong,Toast.LENGTH_SHORT).show();
+                howManyTimes = -1;
+            }
+            if(whenToRepeat !=0 && howManyTimes != 0) {
+                if (dataBaseHelper.insertNewRevenue(dataBaseHelper, category, quantity, isRepeatitive, whenToRepeat, howManyTimes) > 0) {
+                    category_box.setText("");
+                    check_repeat.setChecked(false);
+                    quantity_expenses_box.setText("");
+                    Toast.makeText(getActivity().getApplicationContext(), R.string.revenue_added, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity().getApplicationContext(), R.string.something_is_wrong, Toast.LENGTH_SHORT).show();
+                }
+            }else {
+                Toast.makeText(getActivity().getApplicationContext(), R.string.wrong_information,Toast.LENGTH_SHORT).show();
             }
         }catch (Exception ex){
             Toast.makeText(getActivity().getApplicationContext(), R.string.something_is_wrong,Toast.LENGTH_SHORT).show();
@@ -86,8 +102,10 @@ public class Revenue extends Fragment implements View.OnClickListener, CompoundB
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if(isChecked){
             frecuency_options2.setEnabled(true);
+            how_many_optionsr.setEnabled(true);
         }else{
             frecuency_options2.setEnabled(false);
+            how_many_optionsr.setEnabled(false);
         }
     }
 }
