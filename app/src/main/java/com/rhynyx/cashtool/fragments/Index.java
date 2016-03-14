@@ -75,6 +75,9 @@ public class Index extends Fragment implements View.OnClickListener{
                     double acum_money_year = dataBaseHelper.getAnnualAmount();
                     double level_rich = dataBaseHelper.getRichLevel();
 
+                  //  dataBaseHelper.checkExpensesUpdate();
+                  //  dataBaseHelper.checkRevenueUpdate();
+
                     total_acum_box.setText("$".concat(String.valueOf(total_acum)));
                     monthly_payment_box.setText("$".concat(String.valueOf(monthly_am)));
                     acum_money_year_box.setText("$".concat(String.valueOf(acum_money_year)));
