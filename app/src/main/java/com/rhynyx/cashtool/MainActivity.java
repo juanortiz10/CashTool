@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity
             Intent alarmIntent = new Intent(this, Receiver.class);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(this,0,alarmIntent,0);
             AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-            int interval = 1000/*28800000*/;
+            int interval = 28800000;
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),interval,pendingIntent);
             Toast.makeText(getApplicationContext(),"Set at",Toast.LENGTH_SHORT).show();
         }catch (Exception ex){}
