@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.rhynyx.cashtool.fragments.Expenses;
+import com.rhynyx.cashtool.fragments.Index;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -102,7 +103,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = dataBaseHelper.getReadableDatabase();
 
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            Date today = Calendar.getInstance().getTime();
+        Date today = Calendar.getInstance().getTime();
         int whenDays;
         if (isRepeat)
             whenDays = checkDays(when);
@@ -365,28 +366,54 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         queryExp.append(" WHERE ".concat(ExpensesTable.TableExp.date_next).concat("='").concat(todayDate).concat("';"));
 
         Cursor cursor =  database.rawQuery(queryExp.toString(), null);
-        ArrayList<com.rhynyx.cashtool.models.Expenses> ids = new ArrayList<>();
 
-        if(cursor.moveToFirst()){
-            do {
-                /*com.rhynyx.cashtool.models.Expenses expenses = new com.rhynyx.cashtool.models.Expenses();
-                expenses.setId_expense(Integer.parseInt(cursor.getString(cursor.getColumnIndex(ExpensesTable.TableExp.id_expense))));
-                expenses.setWhen_days(Integer.parseInt(cursor.getString(cursor.getColumnIndex(ExpensesTable.TableExp.when_days))));
-                expenses.setDate_next(cursor.getString(cursor.getColumnIndex(ExpensesTable.TableExp.date_next)));
-                AGARRAR Cantidades, dias a repetirB
-                //ids.add(expenses);*/
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Integer whenDays = Integer.parseInt(cursor.getString(cursor.getColumnIndex(ExpensesTable.TableExp.when_days)));
+                    Integer howMany = Integer.parseInt(cursor.getString(cursor.getColumnIndex(ExpensesTable.TableExp.how_many)));
+                    String category = String.valueOf(cursor.getString(cursor.getColumnIndex(ExpensesTable.TableExp.category_expense)));
+                    Double cuantity = Double.parseDouble(cursor.getString(cursor.getColumnIndex(ExpensesTable.TableExp.cuantity_expense)));
 
-            }while (cursor.moveToNext());
+                    this.insertNewExpense(this, category, cuantity, true, whenDays, howMany - 1);
+                } while (cursor.moveToNext());
+            }
+        }catch (Exception ex){
+        }finally {
+            database.close();
         }
-        /*
-        * Algorithm
-        * *Check today date
-        * compare with the data_next
-        * if are similar results, update charge and data_next
-        * */
     }
 
     public void checkRevenueUpdate(){
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date today = Calendar.getInstance().getTime();
+        String todayDate = dateFormat.format(today);
 
+        StringBuilder queryRev = new StringBuilder();
+        SQLiteDatabase database = this.getReadableDatabase();
+
+        queryRev.append(" SELECT *");
+        queryRev.append(" FROM ");
+        queryRev.append(RevenueTable.TableRev.revenue_table_name);
+        queryRev.append(" WHERE ".concat(RevenueTable.TableRev.date_next).concat("='").concat(todayDate).concat("';"));
+
+        Cursor cursor =  database.rawQuery(queryExp.toString(), null);
+
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Integer whenDays = Integer.parseInt(cursor.getString(cursor.getColumnIndex(RevenueTable.TableRev.when_days)));
+                    Integer howMany = Integer.parseInt(cursor.getString(cursor.getColumnIndex(RevenueTable.TableRev.how_many)));
+                    String category = String.valueOf(cursor.getString(cursor.getColumnIndex(RevenueTable.TableRev.category_revenue)));
+                    Double cuantity = Double.parseDouble(cursor.getString(cursor.getColumnIndex(RevenueTable.TableRev.cuantity_revenue)));
+
+                    this.insertNewExpense(this, category, cuantity, true, whenDays, howMany - 1);
+                } while (cursor.moveToNext());
+            }
+        }catch (Exception ex){
+
+        }finally {
+            database.close();
+        }
     }
 }
