@@ -13,6 +13,10 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.rhynyx.cashtool.R;
+import com.rhynyx.cashtool.database.DataBaseHelper;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import static com.rhynyx.cashtool.R.color.green;
 
@@ -34,7 +38,7 @@ public class AccountsResume extends Fragment {
         cabeceraEgr.setBackgroundColor(Color.RED);
             tabAREgr.addView(cabeceraEgr);
             tabARIng.addView(cabeceraIng);
-        llenarTabla(tabARIng,v);
+        llenarTabla(tabAREgr,v,"Egreso");
         return v;
     }
 
@@ -52,8 +56,26 @@ public class AccountsResume extends Fragment {
         }
         return cabecera;
     }
-    public void llenarTabla(TableLayout table, View v){
-        Resources res = getResources();
+    public void llenarTabla(TableLayout table, View v, String nm){
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity().getApplicationContext());
+        if (nm.equals("Ingreso")){
+            TableRow tr = new TableRow(this.getActivity());
+        }else if(nm.equals("Egreso")){
+            TableRow tr = new TableRow(this.getActivity());
+            ArrayList res = dataBaseHelper.getExp();
+            Iterator it = res.iterator();
+            while (it.hasNext()){
+                String[] data =(String[]) it.next();
+                for (int y=0;y<3;y++) {
+                    TextView tv = new TextView(v.getContext());
+                    tv.setText(data[y]);
+                    tr.addView(tv);
+                }
+            }
+
+            table.addView(tr);
+        }else{}
+       /* Resources res = getResources();
        for (int i =0;i<10;i++) {
            TableRow tr = new TableRow(this.getActivity());
            for (int y=0;y<3;y++) {
@@ -62,6 +84,6 @@ public class AccountsResume extends Fragment {
                tr.addView(data);
            }
            table.addView(tr);
-       }
+       }*/
     }
 }

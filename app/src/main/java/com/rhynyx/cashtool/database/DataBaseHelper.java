@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.rhynyx.cashtool.fragments.Expenses;
 import com.rhynyx.cashtool.fragments.Index;
@@ -415,5 +416,43 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }finally {
             database.close();
         }
+    }
+    //Get all the Expenses with Category, Amount, Date
+    public ArrayList getExp(){
+        ArrayList<String[]> results = new ArrayList<String[]>();
+
+        StringBuilder sql = new StringBuilder();
+        SQLiteDatabase database = this.getReadableDatabase();
+        String[] args = new String[1];
+        args[0]= getMonth();
+        sql.append("SELECT ");
+        sql.append(ExpensesTable.TableExp.category_expense);
+        sql.append(" , ");
+        sql.append(ExpensesTable.TableExp.cuantity_expense);
+        sql.append(" , ");
+        sql.append(ExpensesTable.TableExp.date_now);
+        sql.append(" FROM ");
+        sql.append(ExpensesTable.TableExp.expense_table_name);
+        sql.append(" WHERE ");
+        sql.append(" strftime('%m', ".concat(ExpensesTable.TableExp.date_now).concat(") = ? "));
+        sql.append("ORDER BY ".concat(ExpensesTable.TableExp.date_now).concat(";"));
+
+        Cursor cursor =  database.rawQuery(sql.toString(),args);
+        try{
+            if (cursor.moveToFirst()){
+                do {
+                    String[] reg = new String[3];
+                    reg[0] = cursor.getString(0);
+                    reg[1] = cursor.getString(1);
+                    reg[2] = cursor.getString(2);
+                    results.add(reg);
+                } while(cursor.moveToNext());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            database.close();
+        }
+        return results;
     }
 }
