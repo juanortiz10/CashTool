@@ -72,7 +72,7 @@ public class Revenue extends Fragment implements View.OnClickListener, CompoundB
         try {
             DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity().getApplicationContext());
             Double quantity = Double.parseDouble(quantity_expenses_box.getText().toString().trim());
-            String category = category_box.toString().trim();
+            String category = category_box.getText().toString();
             boolean isRepeatitive = check_repeat.isChecked();
             int whenToRepeat = frecuency_options2.getSelectedItemPosition();
             int howManyTimes = how_many_optionsr.getSelectedItemPosition();

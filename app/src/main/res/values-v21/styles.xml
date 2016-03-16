@@ -44,4 +44,7 @@
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:layout_marginTop">20sp</item>
     </style>
+    <style name="table">
+        <item name="android:background">@color/white</item>
+    </style>
 </resources>

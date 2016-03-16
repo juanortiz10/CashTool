@@ -9,15 +9,17 @@
         android:layout_height="wrap_content"
         android:id="@+id/Ingresos"
         android:text="@string/revenue"
-        android:textColor="@color/green"
+
         />
 
     <TableLayout
-        android:layout_width="wrap_content"
+        style="@style/table"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/table_ARIng"
         android:layout_below="@+id/Ingresos"
         android:layout_centerHorizontal="true"
+        android:layout_margin="15sp"
         android:elevation="5sp">
 
     </TableLayout>
@@ -28,14 +30,16 @@
         android:id="@+id/Egresos"
         android:text="@string/expenses"
         android:layout_below="@+id/table_ARIng"
-        android:textColor="@color/red"/>
+        />
 
     <TableLayout
-        android:layout_width="wrap_content"
+        style="@style/table"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/table_AREgr"
         android:layout_below="@+id/Egresos"
         android:layout_centerHorizontal="true"
+        android:layout_margin="15sp"
         android:elevation="5sp">
 
 
