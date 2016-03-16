@@ -56,24 +56,27 @@ public class AccountsResume extends Fragment {
         }
         return cabecera;
     }
+
     public void llenarTabla(TableLayout table, View v, String nm){
         DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity().getApplicationContext());
         if (nm.equals("Ingreso")){
             TableRow tr = new TableRow(this.getActivity());
         }else if(nm.equals("Egreso")){
-            TableRow tr = new TableRow(this.getActivity());
+
             ArrayList res = dataBaseHelper.getExp();
             Iterator it = res.iterator();
             while (it.hasNext()){
+                TableRow tr = new TableRow(this.getActivity());
+                tr.setPadding(5,5,5,5);
                 String[] data =(String[]) it.next();
                 for (int y=0;y<3;y++) {
                     TextView tv = new TextView(v.getContext());
                     tv.setText(data[y]);
+                    tv.setPadding(10,10,10,10);
                     tr.addView(tv);
                 }
+                table.addView(tr);
             }
-
-            table.addView(tr);
         }else{}
        /* Resources res = getResources();
        for (int i =0;i<10;i++) {

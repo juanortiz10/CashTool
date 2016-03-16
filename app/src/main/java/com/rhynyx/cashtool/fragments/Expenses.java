@@ -64,7 +64,7 @@ public class Expenses extends Fragment implements View.OnClickListener, Compound
     public void onClick(View v) {
         DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity().getApplicationContext());
         Double quantity = Double.parseDouble(quantity_expenses_box.getText().toString().trim());
-        String category = category_box.toString().trim();
+        String category = category_box.getText().toString();
         boolean isRepeat = check_repeat.isChecked();
         int whenDays = frecuency_options.getSelectedItemPosition();
         int how_many = how_many_optionse.getSelectedItemPosition();

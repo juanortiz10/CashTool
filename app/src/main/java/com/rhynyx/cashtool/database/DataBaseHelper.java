@@ -423,8 +423,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         StringBuilder sql = new StringBuilder();
         SQLiteDatabase database = this.getReadableDatabase();
-        String[] args = new String[1];
-        args[0]= getMonth();
         sql.append("SELECT ");
         sql.append(ExpensesTable.TableExp.category_expense);
         sql.append(" , ");
@@ -433,20 +431,36 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         sql.append(ExpensesTable.TableExp.date_now);
         sql.append(" FROM ");
         sql.append(ExpensesTable.TableExp.expense_table_name);
-        sql.append(" WHERE ");
-        sql.append(" strftime('%m', ".concat(ExpensesTable.TableExp.date_now).concat(") = ? "));
-        sql.append("ORDER BY ".concat(ExpensesTable.TableExp.date_now).concat(";"));
-
-        Cursor cursor =  database.rawQuery(sql.toString(),args);
+        sql.append(" WHERE substr(".concat(ExpensesTable.TableExp.date_now).concat(",4,2)='").concat(this.getMonth()).concat("'"));
+        /*sql.append(" WHERE ");
+        sql.append(" strftime('%m', ".concat(ExpensesTable.TableExp.date_now).concat(") = ? "));*/
+        sql.append(" ORDER BY ".concat(ExpensesTable.TableExp.date_now).concat(" desc ;"));
+        System.out.println(sql.toString());
+         Cursor cursor = database.rawQuery(sql.toString(),null);
         try{
             if (cursor.moveToFirst()){
                 do {
                     String[] reg = new String[3];
                     reg[0] = cursor.getString(0);
+                    System.out.println(cursor.getString(0));
                     reg[1] = cursor.getString(1);
+                    System.out.println(cursor.getString(1));
                     reg[2] = cursor.getString(2);
+                    System.out.println(cursor.getString(2));
                     results.add(reg);
                 } while(cursor.moveToNext());
+            }else{
+                System.out.println("*******************************************************************");
+                System.out.println("*******************************************************************");
+                System.out.println("*******************************************************************");
+                System.out.println("*******************************************************************");
+                System.out.println("*******************************************************************");
+                System.out.println("*******************ESTA VACIO EL QUERY*****************************");
+                System.out.println("*******************************************************************");
+                System.out.println("*******************************************************************");
+                System.out.println("*******************************************************************");
+                System.out.println("*******************************************************************");
+
             }
         }catch (Exception e){
             e.printStackTrace();
