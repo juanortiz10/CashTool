@@ -32,6 +32,8 @@
     <string name="wrong_information">Selecciona correctamente todos los componentes</string>
     <string name="cash">CashTool</string>
     <string name="have_you_done">¿Has hecho algunos gastos el dia de hoy?</string>
+    <string name="notifications">Notificaciones</string>
+    <string name="preference">com.rhynyx.cashtool.PREFERENCE_FILE_KEY</string>
 
     <string-array name="times">
         <item>Repetir Cada</item>

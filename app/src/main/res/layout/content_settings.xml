@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginTop="25sp">
 
-</LinearLayout>
+    <TextView
+        style="@style/headerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvsettings"
+        android:text="@string/settings"
+
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvsettings"
+        android:layout_margin="15sp"
+        android:background="@color/white"
+        android:elevation="5sp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/notifications"
+            android:textSize="30sp"
+            android:layout_margin="30sp"/>
+
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/switchSet"
+            android:checked="false"
+            android:layout_margin="29sp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
