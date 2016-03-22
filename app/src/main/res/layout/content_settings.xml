@@ -12,19 +12,21 @@
         android:text="@string/settings"
 
         />
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvsettings"
         android:layout_margin="15sp"
+        android:id="@+id/RLSettings"
         android:background="@color/white"
         android:elevation="5sp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/notifications"
-            android:textSize="30sp"
-            android:layout_margin="30sp"/>
+            android:textSize="25sp"
+            android:layout_margin="20sp"
+            android:id="@+id/tvnoti"/>
 
 
         <Switch
@@ -32,8 +34,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/switchSet"
             android:checked="false"
-            android:layout_margin="29sp"/>
+            android:layout_margin="20sp"
+            android:layout_alignParentRight="true"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

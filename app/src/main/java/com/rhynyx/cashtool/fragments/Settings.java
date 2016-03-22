@@ -9,7 +9,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.rhynyx.cashtool.R;
 
@@ -23,15 +25,29 @@ public class Settings extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.content_settings, container, false);
         notiSwitch = (Switch)v.findViewById(R.id.switchSet);
-        Context context = getActivity();
-        SharedPreferences sharedPref = context.getSharedPreferences(getString(R.string.preference), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        boolean notStatus = notiSwitch.isChecked();
-        if (notStatus){
-            editor.putString("Status","On");
-        }else {
-            editor.putString("Status", "Off");
-        }
+
+
+        notiSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Context context = getActivity();
+                SharedPreferences sharedPref = context.getSharedPreferences(getString(R.string.preference), Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                boolean notStatus = notiSwitch.isChecked();
+                if (notStatus) {
+
+                    editor.putString("Status", "On");
+                    Toast toast = Toast.makeText(context, R.string.notiOn, Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    editor.putString("Status", "Off");
+                    Toast toast = Toast.makeText(context, R.string.notiOff, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                editor.commit();
+            }
+        });
+
         return v;
     }
 }
