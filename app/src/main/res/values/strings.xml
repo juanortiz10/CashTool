@@ -33,8 +33,8 @@
     <string name="cash">CashTool</string>
     <string name="have_you_done">¿Has hecho algunos gastos el dia de hoy?</string>
     <string name="notifications">Notificaciones</string>
-    <string name="notiOn">Notificaciones Encendidas</string>
-    <string name="notiOff">Notificaciones Apagadas</string>
+    <string name="ON">ON</string>
+    <string name="OFF">OFF</string>
     <string name="preference">com.rhynyx.cashtool.PREFERENCE_FILE_KEY</string>
 
     <string-array name="times">

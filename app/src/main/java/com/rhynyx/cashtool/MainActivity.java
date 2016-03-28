@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -57,16 +58,12 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-        try{
-            Intent alarmIntent = new Intent(this, Receiver.class);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(this,0,alarmIntent,0);
-            AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-            int interval = 28800000;
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),interval,pendingIntent);
-            Toast.makeText(getApplicationContext(),"Set at",Toast.LENGTH_SHORT).show();
-        }catch (Exception ex){}
-
+        SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.preference), Context.MODE_PRIVATE);
+        if(!sharedPref.contains("Status")){
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("Status", "OFF");
+            editor.commit();
+        }
     }
 
     @Override
