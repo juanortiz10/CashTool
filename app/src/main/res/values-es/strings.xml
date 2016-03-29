@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CashTool</string>
+    <string name="OFF">Encendido</string>
+    <string name="ON">Apagado</string>
+    <string name="account">Cuenta</string>
+    <string name="account_resume">Resumen de Cuentas</string>
+    <string name="account_text">Cuenta</string>
+    <string name="account_user">Juan Ortiz</string>
+    <string name="accounts">Cuentas</string>
+    <string name="action_settings">Settings</string>
+    <string name="acum_money">Saldo Acumulado</string>
+    <string name="add">Guardar</string>
+    <string name="balance">Saldo</string>
+    <string name="category">Categoria</string>
+    <string name="español">Español</string>
+    <string name="expense_added">Egreso agregado correctamente</string>
+    <string name="expenses">Egresos</string>
+    <string name="have_you_done">¿Has hecho algunos gastos el dia de hoy?</string>
+    <string name="home">Inicio</string>
+    <string name="idioma">Idioma</string>
+    <string name="ingles">Ingles</string>
+    <string name="it_repeats">Se Repite</string>
+    <string name="level_rich">Nivel de Riqueza</string>
+    <string name="level_rich_msj">**El nivel de riqueza indica la cantidad de meses que podrías vivir en base a tus gastos actuales</string>
+    <string name="monthly_payment">Saldo del Mes</string>
+    <string name="notifications">Notificaciones</string>
+    <string name="quantity">Monto</string>
+    <string name="revenue">Ingresos</string>
+    <string name="revenue_added">Ingreso agregado exitosamente</string>
+    <string name="settings">Configuración</string>
+    <string name="something_is_wrong">Algo ha salido mal!</string>
+    <string name="total_acum">Total Acumulado</string>
+    <string name="wrong_information">Selecciona correctamente todos los componentes</string>
+    <string name="zero">$0.0</string>
+
+    <string-array name="times">
+        <item>Repetir Cada</item>
+        <item>7 Dias</item>
+        <item>15 Dias</item>
+        <item>1 Mes</item>
+        <item>3 Meses</item>
+        <item>6 Meses</item>
+        <item>1 Año</item>
+    </string-array>
+
+    <string-array name="how_long">
+        <item>Ocasiones</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+
+    <string-array name="table_AccountsResume">
+        <item>Categoria</item>
+        <item>Monto</item>
+        <item>Fecha</item>
+    </string-array>
+</resources>

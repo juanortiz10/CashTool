@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_marginTop="30sp"
+    android:layout_marginTop="40sp"
     android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="40sp"
-        android:id="@+id/relativeLayout"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true">
+        android:padding="35sp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/relativeLayout">
         <TextView
             android:id="@+id/monthly_payment"
             android:text="@string/monthly_payment"
@@ -61,27 +58,4 @@
             android:layout_alignParentStart="true" />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/relativeLayout"
-        android:layout_toEndOf="@+id/relativeLayout"
-        android:layout_alignBottom="@+id/relativeLayout">
-        <Button
-            style="@style/buttonIndexDesign"
-            android:background="@color/green"
-            android:text="@string/revenue"
-            android:id="@+id/btn_revenue"
-            android:layout_alignParentTop="true"
-            android:layout_alignLeft="@+id/btn_expenses"
-            android:layout_alignStart="@+id/btn_expenses"
-            android:layout_marginTop="159dp" />
-        <Button
-            style="@style/buttonIndexDesign"
-            android:background="@color/red"
-            android:text="@string/expenses"
-            android:id="@+id/btn_expenses"
-            android:layout_below="@+id/btn_revenue"/>
-    </RelativeLayout>
 </RelativeLayout>

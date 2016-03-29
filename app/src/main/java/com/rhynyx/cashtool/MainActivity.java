@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -32,6 +33,8 @@ import com.rhynyx.cashtool.fragments.Revenue;
 import com.rhynyx.cashtool.fragments.Settings;
 import com.rhynyx.cashtool.services.NotificationService;
 import com.rhynyx.cashtool.services.Receiver;
+
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -63,7 +66,19 @@ public class MainActivity extends AppCompatActivity
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("Status", "OFF");
             editor.commit();
+
         }
+
+
+        if(!sharedPref.contains("Language")){
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("Language", "MX");
+            editor.commit();
+            Configuration conf = getResources().getConfiguration();
+                getResources().updateConfiguration(conf, getResources().getDisplayMetrics());
+        }
+
+
     }
 
     @Override

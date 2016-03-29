@@ -2,40 +2,72 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="30sp">
+    android:layout_marginTop="55sp">
 
-    <TextView
-        style="@style/headerText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvsettings"
-        android:text="@string/settings"
-
-        />
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvsettings"
-        android:layout_margin="15sp"
+        android:layout_height="match_parent"
+        android:layout_margin="20sp"
+
         android:id="@+id/RLSettings"
         android:background="@color/white"
         android:elevation="5sp">
-        <TextView
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/notifications"
-            android:textSize="25sp"
-            android:layout_margin="20sp"
-            android:id="@+id/tvnoti"/>
+            android:id="@+id/tr1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/notifications"
+                android:textSize="25sp"
+                android:layout_margin="20sp"
+                android:id="@+id/tvnoti"/>
 
 
-        <Switch
-            android:layout_width="wrap_content"
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/switchSet"
+                android:checked="false"
+                android:layout_margin="20sp"
+                android:layout_alignParentRight="true" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/switchSet"
-            android:checked="false"
-            android:layout_margin="20sp"
-            android:layout_alignParentRight="true"/>
+            android:id="@+id/tr2"
+            android:layout_below="@+id/tr1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtIdioma"
+                android:text="@string/idioma"
+                android:textSize="25sp"
+                android:layout_marginLeft="20sp"/>
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtIdioma"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/español"
+                    android:id="@+id/RBespañol"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="20sp"
+                    android:layout_margin="10sp"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ingles"
+                    android:id="@+id/RBingles"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="20sp"
+                    android:layout_margin="10sp"/>
+            </RadioGroup>
+        </RelativeLayout>
 
     </RelativeLayout>
 

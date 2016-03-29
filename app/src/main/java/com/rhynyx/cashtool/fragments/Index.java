@@ -19,7 +19,6 @@ import com.rhynyx.cashtool.database.DataBaseHelper;
  */
 public class Index extends Fragment implements View.OnClickListener{
     EditText monthly_payment_box,acum_money_year_box,total_acum_box,level_rich_box;
-    Button btn_revenue, btn_expenses;
 
     @Nullable
     @Override
@@ -30,11 +29,7 @@ public class Index extends Fragment implements View.OnClickListener{
         acum_money_year_box = (EditText)v.findViewById(R.id.acum_money_box);
         total_acum_box = (EditText)v.findViewById(R.id.total_acum_box);
         level_rich_box = (EditText)v.findViewById(R.id.level_rich_box);
-        btn_revenue = (Button)v.findViewById(R.id.btn_revenue);
-        btn_expenses = (Button)v.findViewById(R.id.btn_expenses);
 
-        btn_expenses.setOnClickListener(this);
-        btn_revenue.setOnClickListener(this);
 
         return v;
     }
@@ -48,14 +43,6 @@ public class Index extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         Fragment fragment = null;
-
-        if(v.getId() == R.id.btn_expenses){
-              fragment = new Expenses();
-              getActivity().setTitle(R.string.expenses);
-        }else if(v.getId() == R.id.btn_revenue){
-              fragment = new Revenue();
-              getActivity().setTitle(R.string.revenue);
-        }
 
         android.support.v4.app.FragmentTransaction fragmentTransaction1
                 = getActivity().getSupportFragmentManager().beginTransaction();

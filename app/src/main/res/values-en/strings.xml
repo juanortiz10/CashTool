@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CashTool</string>
+    <string name="OFF">OFF</string>
+    <string name="ON">ON</string>
+    <string name="account">Account</string>
+    <string name="account_resume">Account Resume</string>
+    <string name="account_text">Account</string>
+    <string name="account_user">John Ort</string>
+    <string name="accounts">Accounts</string>
+    <string name="action_settings">Settings</string>
+    <string name="acum_money">Total Balance</string>
+    <string name="add">Save</string>
+    <string name="balance">Balance</string>
+    <string name="cash"></string>
+    <string name="category">Category</string>
+    <string name="español">Spanish</string>
+    <string name="expense_added">Outcome registered</string>
+    <string name="expenses">Outcome</string>
+    <string name="have_you_done">Have you done any expesnes today?</string>
+    <string name="home">Home</string>
+    <string name="idioma">Language</string>
+    <string name="ingles">English</string>
+    <string name="it_repeats">It repeats</string>
+    <string name="level_rich">Wealth Level</string>
+    <string name="level_rich_msj">The level of wealth indicates the number of months you could live based on your current expenses</string>
+    <string name="monthly_payment">Balance of the Month</string>
+    <string name="notifications">Notifications</string>
+    <string name="quantity" translatable="false">Amount</string>
+    <string name="revenue">Incomes</string>
+    <string name="revenue_added">Income registered</string>
+    <string name="settings">Settings</string>
+    <string name="something_is_wrong">Something goes wrong!</string>
+    <string name="total_acum">Balance</string>
+    <string name="wrong_information">Please, select all the components</string>
+    <string name="zero">$0.0</string>
+
+    <string-array name="times">
+        <item>Repeat every</item>
+        <item>7 Days</item>
+        <item>15 Days</item>
+        <item>1 Month</item>
+        <item>3 Months</item>
+        <item>6 Months</item>
+        <item>1 year</item>
+    </string-array>
+
+    <string-array name="how_long">
+        <item>Times</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+
+    <string-array name="table_AccountsResume">
+        <item>Category</item>
+        <item>Amount</item>
+        <item>Date</item>
+    </string-array>
+</resources>
