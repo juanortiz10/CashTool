@@ -56,6 +56,11 @@
         android:textSize="20sp"
         android:layout_below="@+id/category"
         android:layout_centerHorizontal="true" />
+    <Spinner
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/category"
+        android:layout_centerHorizontal="true" ></Spinner>
 
     <CheckBox
         android:layout_width="wrap_content"

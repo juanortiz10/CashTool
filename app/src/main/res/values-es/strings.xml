@@ -33,6 +33,9 @@
     <string name="total_acum">Total Acumulado</string>
     <string name="wrong_information">Selecciona correctamente todos los componentes</string>
     <string name="zero">$0.0</string>
+    <string name="add_category">Agregar Categoria</string>
+    <string name="dlt_category">Borrar Categoria</string>
+    <string name="delete">Borrar</string>
 
     <string-array name="times">
         <item>Repetir Cada</item>

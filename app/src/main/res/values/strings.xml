@@ -39,6 +39,9 @@
     <string name="idioma">Idioma</string>
     <string name="español">Español</string>
     <string name="ingles">Ingles</string>
+    <string name="add_category">Agregar Categoria</string>
+    <string name="dlt_category">Borrar Categoria</string>
+    <string name="delete">Borrar</string>
 
     <string-array name="times">
         <item>Repetir Cada</item>

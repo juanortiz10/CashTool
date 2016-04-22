@@ -68,7 +68,70 @@
                     android:layout_margin="10sp"/>
             </RadioGroup>
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tr3"
+            android:layout_below="@+id/tr2">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_category"
+                android:textSize="25sp"
+                android:layout_margin="20sp"
+                android:id="@+id/tvCat"
+                />
+            <EditText
+                android:layout_width="200sp"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:id="@+id/edtCat"
+                android:layout_below="@+id/tvCat"
+                android:layout_centerHorizontal="true"/>
+            <Button
+                style="@style/Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add"
+                android:id="@+id/btn_save_category"
+                android:layout_below="@+id/edtCat"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5sp"
+                />
 
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tr4"
+            android:layout_below="@+id/tr3">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dlt_category"
+                android:textSize="25sp"
+                android:layout_margin="20sp"
+                android:id="@+id/tvCat2"
+                />
+            <Spinner
+                android:layout_width="200sp"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:id="@+id/edtCat2"
+                android:layout_below="@+id/tvCat2"
+                android:layout_centerHorizontal="true"></Spinner>
+            <Button
+                style="@style/Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/delete"
+                android:id="@+id/btn_dlt_category"
+                android:layout_below="@+id/edtCat2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5sp"
+                />
+
+        </RelativeLayout>
     </RelativeLayout>
 
 </RelativeLayout>
