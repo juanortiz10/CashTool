@@ -27,6 +27,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public StringBuilder queryExp = new StringBuilder();
     public StringBuilder queryRev = new StringBuilder();
+    public StringBuilder queryCat = new StringBuilder();
+
+
 
 
     public DataBaseHelper(Context context){
@@ -60,8 +63,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         queryRev.append(RevenueTable.TableRev.date_next.concat(" TEXT"));
         queryRev.append(");");
 
+        queryCat.append("CREATE TABLE IF NOT EXISTS ");
+        queryCat.append(CategoryTable.TableCat.category_table_name);
+        queryCat.append("(");
+        queryCat.append(CategoryTable.TableCat.id_category.concat(" INTEGER PRIMARY KEY,"));
+        queryCat.append(CategoryTable.TableCat.category_name.concat(" TEXT,"));
+        queryCat.append(CategoryTable.TableCat.transaction.concat(" TEXT "));
+        queryCat.append(");");
+
         db.execSQL(queryExp.toString());
         db.execSQL(queryRev.toString());
+        db.execSQL(queryCat.toString());
     }
 
     @Override
@@ -100,6 +112,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
         return id;
     }
+
+    public long insertNewCategory(DataBaseHelper dbHelper, String category, String transaction) {
+        long id = -1;
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(CategoryTable.TableCat.category_name, category);
+        values.put(CategoryTable.TableCat.transaction, transaction);
+        id = db.insert(CategoryTable.TableCat.category_table_name, null, values);
+        db.close();
+        return id;
+    }
+
 
     public long insertNewRevenue(DataBaseHelper dataBaseHelper, String category, Double cuantity, boolean isRepeat, int when,int howMany){
         SQLiteDatabase db = dataBaseHelper.getReadableDatabase();
@@ -457,6 +481,36 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return results;
     }
+    public ArrayList getCategories(String transaction){
+        ArrayList results = new ArrayList();
+        StringBuilder sql = new StringBuilder();
+        SQLiteDatabase database = this.getReadableDatabase();
+        sql.append("SELECT ");
+        sql.append(CategoryTable.TableCat.category_name);
+        sql.append("  FROM ");
+        sql.append(CategoryTable.TableCat.category_table_name);
+        sql.append(" WHERE ");
+        sql.append(CategoryTable.TableCat.transaction.concat(" = "));
+        sql.append(transaction);
+        sql.append(" ;");
+        Cursor cursor = database.rawQuery(sql.toString(),null);
+        try {
+            if(cursor.moveToFirst()){
+                do {
+                    String reg = cursor.getString(0);
+                    results.add(reg);
+                }while (cursor.moveToNext());
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            database.close();
+        }
+
+        return results;
+    }
+
     public ArrayList getRev(){
         ArrayList<String[]> results = new ArrayList<String[]>();
 
@@ -495,4 +549,5 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return results;
     }
+
 }

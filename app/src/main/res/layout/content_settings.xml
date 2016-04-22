@@ -20,7 +20,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/notifications"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:layout_margin="20sp"
                 android:id="@+id/tvnoti"/>
 
@@ -43,12 +43,12 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txtIdioma"
                 android:text="@string/idioma"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:layout_marginLeft="20sp"/>
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/txtIdioma"
+                android:layout_toRightOf="@id/txtIdioma"
                 android:orientation="horizontal">
                 <RadioButton
                     android:layout_width="wrap_content"
@@ -56,31 +56,56 @@
                     android:text="@string/español"
                     android:id="@+id/RBespañol"
                     android:textSize="15sp"
-                    android:layout_marginLeft="20sp"
-                    android:layout_margin="10sp"/>
+                    android:layout_marginLeft="5sp" />
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/ingles"
                     android:id="@+id/RBingles"
                     android:textSize="15sp"
-                    android:layout_marginLeft="20sp"
-                    android:layout_margin="10sp"/>
+                    android:layout_marginLeft="5sp" />
             </RadioGroup>
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"></RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
             android:id="@+id/tr3"
             android:layout_below="@+id/tr2">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/add_category"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:layout_margin="20sp"
                 android:id="@+id/tvCat"
                 />
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tvCat"
+                android:orientation="vertical"
+                android:id="@+id/rdGroup">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/revenue"
+                    android:id="@+id/Ingresos"
+                    android:textSize="15sp"
+                    android:checked="true"
+                    android:layout_marginLeft="5sp" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/expenses"
+                    android:id="@+id/Egresos"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="5sp" />
+            </RadioGroup>
+
             <EditText
                 android:layout_width="200sp"
                 android:layout_height="wrap_content"
@@ -109,7 +134,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/dlt_category"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:layout_margin="20sp"
                 android:id="@+id/tvCat2"
                 />
@@ -117,7 +142,7 @@
                 android:layout_width="200sp"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:id="@+id/edtCat2"
+                android:id="@+id/spinCat"
                 android:layout_below="@+id/tvCat2"
                 android:layout_centerHorizontal="true"></Spinner>
             <Button
@@ -126,7 +151,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/delete"
                 android:id="@+id/btn_dlt_category"
-                android:layout_below="@+id/edtCat2"
+                android:layout_below="@+id/spinCat"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5sp"
                 />

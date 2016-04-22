@@ -8,18 +8,25 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import com.rhynyx.cashtool.MainActivity;
 import com.rhynyx.cashtool.R;
+import com.rhynyx.cashtool.database.DataBaseHelper;
 import com.rhynyx.cashtool.services.Receiver;
 
 import java.util.Locale;
@@ -29,10 +36,17 @@ import java.util.Locale;
  */
 public class Settings extends Fragment {
     Switch notiSwitch;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.content_settings, container, false);
+        Button btnCat =(Button)v.findViewById(R.id.btn_save_category);
+        final RadioGroup rdgroup=(RadioGroup)v.findViewById(R.id.rdGroup);
+        final RadioButton ing = (RadioButton)v.findViewById(R.id.Ingresos);
+        final RadioButton eg = (RadioButton)v.findViewById(R.id.Egresos);
+        final EditText edtCat = (EditText)v.findViewById(R.id.edtCat);
+        Spinner spDelt = (Spinner)v.findViewById(R.id.spinCat);
         /**
          *
          *
@@ -124,10 +138,41 @@ public class Settings extends Fragment {
         }else {
             es.setChecked(true);
         }
+        /**
+         *
+         *
+         * ---------------AGREGAR CATEGORIA------------------------>
+         *
+         *
+         *
+         */
+        btnCat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DataBaseHelper db = new DataBaseHelper(getActivity().getApplicationContext());
+                if (!edtCat.getText().toString().isEmpty() || !edtCat.getText().toString().equals("\\s"))
+                if(rdgroup.getCheckedRadioButtonId() == eg.getId()){
+                    String tr = "EG";
+                    db.insertNewCategory(db,edtCat.getText().toString(),tr);
+                }else if (rdgroup.getCheckedRadioButtonId() == ing.getId()) {
+                    String tr = "ING";
+                    db.insertNewCategory(db, edtCat.getText().toString(), tr);
+                }else {
+                    Toast.makeText(getActivity(),"ERROR ",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
+        //ArrayAdapter adapter =  new ArrayAdapter(this, android.R.layout.simple_spinner_item, );
 
         return v;
     }
+
+
+
+
+
+
 
     private void changeConf(){
         Configuration conf = new Configuration();
