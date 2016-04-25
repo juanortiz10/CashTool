@@ -12,11 +12,13 @@ import com.rhynyx.cashtool.fragments.Expenses;
 import com.rhynyx.cashtool.fragments.Index;
 import com.rhynyx.cashtool.fragments.Revenue;
 
+import java.sql.SQLOutput;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
 
 /**
  * Created by juan on 6/03/16.
@@ -66,9 +68,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         queryCat.append("CREATE TABLE IF NOT EXISTS ");
         queryCat.append(CategoryTable.TableCat.category_table_name);
         queryCat.append("(");
-        queryCat.append(CategoryTable.TableCat.id_category.concat(" INTEGER PRIMARY KEY,"));
-        queryCat.append(CategoryTable.TableCat.category_name.concat(" TEXT,"));
-        queryCat.append(CategoryTable.TableCat.transaction.concat(" TEXT "));
+        queryCat.append(CategoryTable.TableCat.id_category.concat(" INTEGER PRIMARY KEY, "));
+        queryCat.append(CategoryTable.TableCat.category_name.concat(" TEXT UNIQUE, "));
+        queryCat.append(CategoryTable.TableCat.transaction.concat(" TEXT"));
         queryCat.append(");");
 
         db.execSQL(queryExp.toString());
@@ -113,12 +115,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return id;
     }
 
-    public long insertNewCategory(DataBaseHelper dbHelper, String category, String transaction) {
+    public long insertNewCategory(DataBaseHelper dbHelper, String category, String ingresoegreso) {
         long id = -1;
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         ContentValues values = new ContentValues();
         values.put(CategoryTable.TableCat.category_name, category);
-        values.put(CategoryTable.TableCat.transaction, transaction);
+        values.put(CategoryTable.TableCat.transaction, ingresoegreso);
         id = db.insert(CategoryTable.TableCat.category_table_name, null, values);
         db.close();
         return id;
@@ -481,8 +483,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return results;
     }
-    public ArrayList getCategories(String transaction){
-        ArrayList results = new ArrayList();
+    public LinkedList getCategories(String ingresoegreso){
+        LinkedList  results = new  LinkedList();
         StringBuilder sql = new StringBuilder();
         SQLiteDatabase database = this.getReadableDatabase();
         sql.append("SELECT ");
@@ -490,13 +492,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         sql.append("  FROM ");
         sql.append(CategoryTable.TableCat.category_table_name);
         sql.append(" WHERE ");
-        sql.append(CategoryTable.TableCat.transaction.concat(" = "));
-        sql.append(transaction);
+        sql.append(CategoryTable.TableCat.transaction.concat(" LIKE "));
+        sql.append("'%".concat(ingresoegreso).concat("%'"));
         sql.append(" ;");
         Cursor cursor = database.rawQuery(sql.toString(),null);
         try {
             if(cursor.moveToFirst()){
                 do {
+                    //System.out.println("*********************************** "+cursor.getString(0)+" "+cursor.getString(1)+" "+cursor.getString(2));
                     String reg = cursor.getString(0);
                     results.add(reg);
                 }while (cursor.moveToNext());
@@ -549,5 +552,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return results;
     }
-
+    public void deleteCategory(DataBaseHelper db1,String category,String ingresoegreso){
+        StringBuilder sql = new StringBuilder();
+        SQLiteDatabase db = db1.getReadableDatabase();
+      /*  sql.append("DELETE FROM ");
+        sql.append(CategoryTable.TableCat.category_table_name);
+        sql.append(" WHERE ");
+        sql.append(CategoryTable.TableCat.category_name);
+        sql.append( " = ");
+        sql.append("'"+category+"'");
+        sql.append(" AND ");
+        sql.append(CategoryTable.TableCat.transaction);
+        sql.append(" = ");
+        sql.append("'"+ingresoegreso+"'");
+        sql.append(" ;");
+        System.out.println(sql.toString());*/
+        db.delete(CategoryTable.TableCat.category_table_name, CategoryTable.TableCat.category_name + " = ? AND " + CategoryTable.TableCat.transaction + " = ? ", new String[]{category, ingresoegreso});
+       // db.execSQL("ALTER IGNORE TABLE "+CategoryTable.TableCat.category_table_name+" ADD UNIQUE INDEX("+CategoryTable.TableCat.category_name+");");
+    }
 }

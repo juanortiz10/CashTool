@@ -18,12 +18,14 @@ import android.widget.Toast;
 import com.rhynyx.cashtool.R;
 import com.rhynyx.cashtool.database.DataBaseHelper;
 
+import java.util.LinkedList;
+
 /**
  * Created by juan on 5/03/16.
  */
 public class Expenses extends Fragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
-    Spinner frecuency_options,how_many_optionse;
-    EditText quantity_expenses_box,category_box;
+    Spinner frecuency_options,how_many_optionse, category_box;
+    EditText quantity_expenses_box;
     CheckBox check_repeat;
     Button btn_save_expenses;
 
@@ -38,7 +40,7 @@ public class Expenses extends Fragment implements View.OnClickListener, Compound
         how_many_optionse.setEnabled(false);
 
         quantity_expenses_box = (EditText) v.findViewById(R.id.quantity_expenses_box);
-        category_box = (EditText) v.findViewById(R.id.category_box);
+        category_box = (Spinner) v.findViewById(R.id.category_box);
 
         check_repeat = (CheckBox) v.findViewById(R.id.check_repeat);
         check_repeat.setOnCheckedChangeListener(this);
@@ -54,6 +56,12 @@ public class Expenses extends Fragment implements View.OnClickListener, Compound
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapterHow.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+        DataBaseHelper db = new DataBaseHelper(getActivity().getApplicationContext());
+        LinkedList list = db.getCategories("EG");
+        ArrayAdapter adapterCat = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, list);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        category_box.setAdapter(adapterCat);
+
         frecuency_options.setAdapter(adapter);
         how_many_optionse.setAdapter(adapterHow);
 
@@ -64,7 +72,7 @@ public class Expenses extends Fragment implements View.OnClickListener, Compound
     public void onClick(View v) {
         DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity().getApplicationContext());
         Double quantity = Double.parseDouble(quantity_expenses_box.getText().toString().trim());
-        String category = category_box.getText().toString();
+        String category = category_box.getSelectedItem().toString();
         boolean isRepeat = check_repeat.isChecked();
         int whenDays = frecuency_options.getSelectedItemPosition();
         int how_many = how_many_optionse.getSelectedItemPosition();
@@ -76,7 +84,7 @@ public class Expenses extends Fragment implements View.OnClickListener, Compound
         try {
             if(whenDays !=0 && how_many!= 0) {
                 if (dataBaseHelper.insertNewExpense(dataBaseHelper, category, quantity, isRepeat, whenDays, how_many) > 0) {
-                    category_box.setText("");
+
                     check_repeat.setChecked(false);
                     quantity_expenses_box.setText("");
                     Toast.makeText(getActivity().getApplicationContext(), R.string.expense_added, Toast.LENGTH_SHORT).show();

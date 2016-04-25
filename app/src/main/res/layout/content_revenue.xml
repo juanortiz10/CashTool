@@ -49,13 +49,12 @@
         android:layout_below="@+id/quantity_expenses_box"
         android:layout_centerHorizontal="true" />
 
-    <EditText
+    <Spinner
         android:layout_width="200sp"
         android:layout_height="wrap_content"
         android:id="@+id/category_box"
-        android:textSize="20sp"
         android:layout_below="@+id/category"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true" ></Spinner>
 
     <CheckBox
         android:layout_width="wrap_content"

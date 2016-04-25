@@ -10,6 +10,6 @@ public class CategoryTable {
         public static final String category_table_name = "tab_category";
         public static final String id_category = "id_category";
         public static final String category_name = "category_name";
-        public static final String transaction  = "transaction";
+        public static final String transaction  = "ingresoegreso";
     }
 }
