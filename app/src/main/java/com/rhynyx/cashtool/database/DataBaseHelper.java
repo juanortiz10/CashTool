@@ -452,14 +452,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase database = this.getReadableDatabase();
         sql.append("SELECT ");
         sql.append(ExpensesTable.TableExp.category_expense);
-        sql.append(" , ");
-        sql.append(ExpensesTable.TableExp.cuantity_expense);
-        sql.append(" , ");
-        sql.append(ExpensesTable.TableExp.date_now);
+        sql.append(" , SUM(");
+        sql.append(ExpensesTable.TableExp.cuantity_expense+") ");
         sql.append(" FROM ");
         sql.append(ExpensesTable.TableExp.expense_table_name);
         sql.append(" WHERE substr(".concat(ExpensesTable.TableExp.date_now).concat(",4,2)='").concat(this.getMonth()).concat("'"));
-        sql.append(" ORDER BY ".concat(ExpensesTable.TableExp.date_now).concat(" desc ;"));
+        sql.append("GROUP BY "+ExpensesTable.TableExp.category_expense+" ORDER BY "+ExpensesTable.TableExp.category_expense+" desc ;");
         System.out.println(sql.toString());
          Cursor cursor = database.rawQuery(sql.toString(),null);
         try{
@@ -470,8 +468,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                     System.out.println(cursor.getString(0));
                     reg[1] = cursor.getString(1);
                     System.out.println(cursor.getString(1));
-                    reg[2] = cursor.getString(2);
-                    System.out.println(cursor.getString(2));
                     results.add(reg);
                 } while(cursor.moveToNext());
             }else{
@@ -521,26 +517,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase database = this.getReadableDatabase();
         sql.append("SELECT ");
         sql.append(RevenueTable.TableRev.category_revenue);
-        sql.append(" , ");
-        sql.append(RevenueTable.TableRev.cuantity_revenue);
-        sql.append(" , ");
-        sql.append(RevenueTable.TableRev.date_now);
+        sql.append(" , SUM(");
+        sql.append(RevenueTable.TableRev.cuantity_revenue+") ");
         sql.append(" FROM ");
         sql.append(RevenueTable.TableRev.revenue_table_name);
         sql.append(" WHERE substr(".concat(RevenueTable.TableRev.date_now).concat(",4,2)='").concat(this.getMonth()).concat("'"));
-        sql.append(" ORDER BY ".concat(RevenueTable.TableRev.date_now).concat(" desc ;"));
+        sql.append("GROUP BY "+RevenueTable.TableRev.category_revenue+" ORDER BY "+RevenueTable.TableRev.category_revenue+" desc;");
         System.out.println(sql.toString());
         Cursor cursor = database.rawQuery(sql.toString(),null);
         try{
             if (cursor.moveToFirst()){
                 do {
-                    String[] reg = new String[3];
+                    String[] reg = new String[2];
                     reg[0] = cursor.getString(0);
                     System.out.println(cursor.getString(0));
                     reg[1] = cursor.getString(1);
                     System.out.println(cursor.getString(1));
-                    reg[2] = cursor.getString(2);
-                    System.out.println(cursor.getString(2));
                     results.add(reg);
                 } while(cursor.moveToNext());
             }else{
@@ -569,5 +561,80 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         System.out.println(sql.toString());*/
         db.delete(CategoryTable.TableCat.category_table_name, CategoryTable.TableCat.category_name + " = ? AND " + CategoryTable.TableCat.transaction + " = ? ", new String[]{category, ingresoegreso});
        // db.execSQL("ALTER IGNORE TABLE "+CategoryTable.TableCat.category_table_name+" ADD UNIQUE INDEX("+CategoryTable.TableCat.category_name+");");
+    }
+    public ArrayList getRevExp(int option){
+        ArrayList<String[]> results = new ArrayList<String[]>();
+            if (option == 1){
+                StringBuilder sql = new StringBuilder();
+                SQLiteDatabase database = this.getReadableDatabase();
+                sql.append("SELECT ");
+                sql.append(RevenueTable.TableRev.category_revenue);
+                sql.append(" , ");
+                sql.append(RevenueTable.TableRev.cuantity_revenue);
+                sql.append(" , ");
+                sql.append(RevenueTable.TableRev.date_now);
+                sql.append(" FROM ");
+                sql.append(RevenueTable.TableRev.revenue_table_name);
+                sql.append(" WHERE substr(".concat(RevenueTable.TableRev.date_now).concat(",4,2)='").concat(this.getMonth()).concat("'"));
+                sql.append(" ORDER BY "+RevenueTable.TableRev.date_now+" desc;");
+                System.out.println(sql.toString());
+                Cursor cursor = database.rawQuery(sql.toString(),null);
+                try{
+                    if (cursor.moveToFirst()){
+                        do {
+                            String[] reg = new String[3];
+                            reg[0] = cursor.getString(0);
+                            System.out.println(cursor.getString(0));
+                            reg[1] = cursor.getString(1);
+                            System.out.println(cursor.getString(1));
+                            reg[2] = cursor.getString(2);
+                            System.out.println(cursor.getString(1));
+                            results.add(reg);
+                        } while(cursor.moveToNext());
+                    }else{
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }finally {
+                    database.close();
+                }
+            }else{
+                StringBuilder sql = new StringBuilder();
+                SQLiteDatabase database = this.getReadableDatabase();
+                sql.append("SELECT ");
+                sql.append(ExpensesTable.TableExp.category_expense);
+                sql.append(" , ");
+                sql.append(ExpensesTable.TableExp.cuantity_expense);
+                sql.append(" , ");
+                sql.append(ExpensesTable.TableExp.date_now);
+                sql.append(" FROM ");
+                sql.append(ExpensesTable.TableExp.expense_table_name);
+                sql.append(" WHERE substr(".concat(ExpensesTable.TableExp.date_now).concat(",4,2)='").concat(this.getMonth()).concat("'"));
+                sql.append(" ORDER BY "+ExpensesTable.TableExp.date_now+" desc ;");
+                System.out.println(sql.toString());
+                Cursor cursor = database.rawQuery(sql.toString(),null);
+                try{
+                    if (cursor.moveToFirst()){
+                        do {
+                            String[] reg = new String[3];
+                            reg[0] = cursor.getString(0);
+                            System.out.println(cursor.getString(0));
+                            reg[1] = cursor.getString(1);
+                            System.out.println(cursor.getString(1));
+                            reg[2] = cursor.getString(2);
+                            System.out.println(cursor.getString(1));
+                            results.add(reg);
+                        } while(cursor.moveToNext());
+                    }else{
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }finally {
+                    database.close();
+                }
+            }
+
+            return results;
+
     }
 }

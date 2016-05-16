@@ -15,13 +15,13 @@
             android:icon="@drawable/ic_expenses"
             android:title="@string/expenses" />
         <item
-            android:id="@+id/nav_accounts"
-            android:icon="@drawable/ic_accounts"
-            android:title="@string/accounts" />
-        <item
             android:id="@+id/nav_account_resume"
             android:icon="@drawable/ic_resume"
             android:title="@string/account_resume" />
+        <item
+            android:id="@+id/nav_detail"
+            android:icon="@drawable/ic_resume"
+            android:title="@string/detail" />
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_menu_manage"

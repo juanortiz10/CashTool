@@ -64,6 +64,15 @@
     <string-array name="table_AccountsResume">
         <item>Category</item>
         <item>Amount</item>
+    </string-array>
+    <string name="detail">Detail</string>
+    <string-array name="Ingreso_Egreso">
+        <item>Incomes</item>
+        <item>Outcomes</item>
+    </string-array>
+    <string-array name="table_DetailHeader">
+        <item>Category</item>
+        <item>Amount</item>
         <item>Date</item>
     </string-array>
 </resources>

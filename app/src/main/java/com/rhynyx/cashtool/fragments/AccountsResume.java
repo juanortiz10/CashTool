@@ -74,7 +74,7 @@ public class AccountsResume extends Fragment {
                 TableRow tr = new TableRow(this.getActivity());
                 tr.setPadding(5,5,5,5);
                 String[] data = (String[]) it.next();
-                for (int y = 0; y < 3; y++) {
+                for (int y = 0; y < 2; y++) {
                     TextView tv = new TextView(v.getContext());
                     tv.setText(data[y]);
                     tv.setPadding(10, 10, 10, 10);
@@ -91,7 +91,7 @@ public class AccountsResume extends Fragment {
                 TableRow tr = new TableRow(this.getActivity());
                 tr.setPadding(5,5,5,5);
                 String[] data =(String[]) it.next();
-                for (int y=0;y<3;y++) {
+                for (int y=0;y<2;y++) {
                     TextView tv = new TextView(v.getContext());
                     tv.setText(data[y]);
                     tv.setPadding(10, 10, 10, 10);

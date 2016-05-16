@@ -42,6 +42,7 @@
     <string name="add_category">Agregar Categoria</string>
     <string name="dlt_category">Borrar Categoria</string>
     <string name="delete">Borrar</string>
+    <string name="detail">Detalle</string>
 
     <string-array name="times">
         <item>Repetir Cada</item>
@@ -70,6 +71,14 @@
     </string-array>
 
     <string-array name="table_AccountsResume">
+        <item>Categoria</item>
+        <item>Monto</item>
+    </string-array>
+    <string-array name="Ingreso_Egreso">
+        <item>Ingresos</item>
+        <item>Egresos</item>
+    </string-array>
+    <string-array name="table_DetailHeader">
         <item>Categoria</item>
         <item>Monto</item>
         <item>Fecha</item>

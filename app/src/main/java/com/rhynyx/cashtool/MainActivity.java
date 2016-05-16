@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.rhynyx.cashtool.database.DataBaseHelper;
 import com.rhynyx.cashtool.fragments.Accounts;
 import com.rhynyx.cashtool.fragments.AccountsResume;
+import com.rhynyx.cashtool.fragments.Detail;
 import com.rhynyx.cashtool.fragments.Expenses;
 import com.rhynyx.cashtool.fragments.Index;
 import com.rhynyx.cashtool.fragments.Revenue;
@@ -132,12 +133,12 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_expenses) {
             fragment = new Expenses();
             setTitle(R.string.expenses);
-        } else if (id == R.id.nav_accounts) {
-            fragment = new Accounts();
-            setTitle(R.string.accounts);
-        } else if (id == R.id.nav_account_resume) {
+        }  else if (id == R.id.nav_account_resume) {
             fragment = new AccountsResume();
             setTitle(R.string.account_resume);
+        }else if (id == R.id.nav_detail) {
+            fragment = new Detail();
+            setTitle(R.string.detail);
         }
 
         android.support.v4.app.FragmentTransaction fragmentTransaction1
